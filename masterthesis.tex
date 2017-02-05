@@ -1,0 +1,82 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{bm}
+
+\title{Application of Gaussian Process regression to the Estimation of time-in-therapeutic-range (TTR) and prediction of the international normalized ratio (INR) in patients under therapy with Vitamin K antagonists}
+\author{Franz Ruderich}
+
+\begin{document}
+	\maketitle
+	
+	
+	
+	\section{Data and methods}
+	
+	\subsection{Gaussian Processes for Regression}
+	For noisy measurements of (laboratory) values at certain time points it is difficult to fix
+	what the best estimates of values between the time points or at future time points are.
+	The assumption of an underlying linear function makes it easy to fit a straight line by least-squares method. But this is often a oversimplification of the problem. The model will provide poor predictions, if the relationship between  dependent and independent variable can not be approximated by a linear function.
+	Even a polynomial regression models the changes of laboratory measurements  over time only unsatisfactorily with the problem of over-fitting
+	Regression with Gaussian processes is a smarter method to model the relationship between successive measured values. 
+	A Gaussian Process does not assume some specific model underlying the data but calculates the relationship between single data points.
+	In principle are Gaussian Processes a generalization of multivariate Gaussian distributions toward infinite dimensionality.
+	The $n$ observations of a (laboratory) data set $y=\{y_{1},y_{2}, \ldots ,y_{n}\}$ measured at the time points $t=\{t_{1},t_{2}, \ldots ,t_{n}\}$ could be imagined as a sample of a multivariate, n-variate Gaussian distribution.
+	
+	A Gaussian process of a real process $f(t)$ is characterized by a mean function $m(t)$ and covariance function $k(t,t')$:
+	
+	\begin{displaymath}
+	m(t) = E[f(t)]\\
+	\end{displaymath}
+	\begin{displaymath}
+	k(t,t') = E[(f(t)-m(t)) (f(t')-m(t'))]
+	\end{displaymath}   
+	
+	In the case of repeated laboratory measurements the function values $f(t)$ represent the laboratory value measured at the time point t.
+	   
+	A typical covariance function is the squared exponential covariance function:
+	
+	\begin{displaymath}
+	cov( f(t_{p} ), f(t_{q} )) = 
+	k( t_{p} , t_{q} ) = 
+	e^{-\frac{(t_{p}-t_{q})^2}{2*l^2}}
+	\end{displaymath}
+	
+	
+	\subsection{Estimation of hyperparameters}
+	Maximum likelihood estimator:
+	\begin{itemize}
+		\item unbiased: $E(\hat{\theta}) = \theta$
+		\item consistent: $\hat{\theta} \rightarrow \theta$, as $n \rightarrow \infty$
+		\item efficient: small $SE(\hat{\theta})$, as $n \rightarrow \infty$
+		\item asymptotically normal: $\frac{(\hat{\theta}-\theta)}{SE(\hat{\theta})} \sim N(0,1)$
+	\end{itemize}
+	\subsubsection{Accuracy of Maximum Likelihood Estimation - The Fisher Information}
+	The estimation of parameters $\bm{\theta}$ by maximizing the log-likelihood function means to find local maxima of this function. 
+	The first derivation of the log-likelihood function, the score, is equated to 0:
+	
+	\begin{displaymath}
+	\frac{\partial \ell (\theta;x)}{\partial \theta}=\frac{\partial \log p(x;\theta)}{\partial \theta} = 0
+	\end{displaymath}
+	
+	The maxima are found by solving this equation. 
+	But it is necessary to know how accurate this estiamtion is. This information is given by calculating the curvature of the likelihood function around the maxima. A sharp curvature around the maximum means a high certainty, while a flat course gives a signal for a quite uncertain estimation.
+	A measure for the curvature of the score function is the variance of the score, called Fisher Information $I(\theta)$. The variance of the score is calculated by this formula:
+	
+	\begin{displaymath}
+	I(\theta)=
+	V[\frac{\partial \ell (\theta,x)}{\partial \theta}]=
+	E[(\frac{\partial}{\partial\theta}\ell(\theta;x))^{2}]=	
+	-E[\frac{\partial^{2} \ell (\theta;x)}{\partial \theta^{2}}]
+	\end{displaymath}
+	
+	The MLE is asymptotically normal distributed, so a asymptotic normal approximation and calculation of a confidence interval is possible:
+	
+	\begin{displaymath}
+	\hat{\theta} \pm 1.96 \frac{1}{\sqrt{I(\hat{\theta})}} 
+	\end{displaymath}
+	
+	
+	
+	
+\end{document}
