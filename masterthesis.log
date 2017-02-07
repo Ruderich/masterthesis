@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2017.2.4)  5 FEB 2017 17:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2017.2.4)  7 FEB 2017 21:25
 entering extended mode
 **./masterthesis.tex
 (masterthesis.tex
@@ -101,61 +101,87 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
 LaTeX Info: Redefining \[ on input line 2739.
 LaTeX Info: Redefining \] on input line 2740.
 )
+(G:\Anwendungen\MiKTeX\tex\latex\amsfonts\amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(G:\Anwendungen\MiKTeX\tex\latex\amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
 (G:\Anwendungen\MiKTeX\tex\latex\tools\bm.sty
 Package: bm 2016/07/07 v1.2b Bold Symbol Support (DPC/FMi)
-\symboldoperators=\mathgroup4
-\symboldletters=\mathgroup5
-\symboldsymbols=\mathgroup6
+\symboldoperators=\mathgroup6
+\symboldletters=\mathgroup7
+\symboldsymbols=\mathgroup8
 LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 142.
 LaTeX Info: Redefining \bm on input line 208.
 ) (masterthesis.aux)
 \openout1 = `masterthesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
-LaTeX Font Info:    ... okay on input line 9.
- [1
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 10.
+LaTeX Font Info:    ... okay on input line 10.
+LaTeX Font Info:    Try loading font information for U+msa on input line 11.
+
+(G:\Anwendungen\MiKTeX\tex\latex\amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 11.
+
+(G:\Anwendungen\MiKTeX\tex\latex\amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 49.
-
-(G:\Anwendungen\MiKTeX\tex\latex\base\omscmr.fd
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 50.
+ (G:\Anwendungen\MiKTeX\tex\latex\base\omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 49.
- [2] [3] (masterthesis.aux) ) 
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 50.
+
+[2] [3]
+Overfull \hbox (58.16725pt too wide) in paragraph at lines 134--134
+[] 
+ []
+
+[4] (masterthesis.aux) ) 
 Here is how much of TeX's memory you used:
- 1377 strings out of 493334
- 15925 string characters out of 3141857
- 77900 words of memory out of 3000000
- 4930 multiletter control sequences out of 15000+200000
- 14849 words of font info for 52 fonts, out of 3000000 for 9000
+ 1666 strings out of 493334
+ 19063 string characters out of 3141857
+ 79401 words of memory out of 3000000
+ 5202 multiletter control sequences out of 15000+200000
+ 17319 words of font info for 64 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 27i,6n,23p,338b,187s stack positions out of 5000i,500n,10000p,200000b,50000s
-<G:/Anwendungen/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmbx12.pfb><G:/Anwendungen/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb
-><G:/Anwendungen/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><G:/Anwendung
-en/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><G:/Anwendungen/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmmi8.pfb><G:/Anwendungen/MiKTeX/fonts/type1/public/a
-msfonts/cm/cmmib10.pfb><G:/Anwendungen/MiKTeX/fonts/type1/public/amsfonts/cm/cm
-r12.pfb><G:/Anwendungen/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><G:/Anw
-endungen/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><G:/Anwendungen/MiKTeX/
-fonts/type1/public/amsfonts/cm/cmr8.pfb><G:/Anwendungen/MiKTeX/fonts/type1/publ
-ic/amsfonts/cm/cmsy10.pfb><G:/Anwendungen/MiKTeX/fonts/type1/public/amsfonts/cm
-/cmsy6.pfb><G:/Anwendungen/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on masterthesis.pdf (3 pages, 140388 bytes).
+ 27i,11n,26p,338b,190s stack positions out of 5000i,500n,10000p,200000b,50000s
+<G:/Anwendungen/MiKTeX/fonts/type1/public/amsfonts/cm/c
+mbx12.pfb><G:/Anwendungen/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><G:/
+Anwendungen/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><G:/Anwendungen/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><G:/Anwendungen/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmmi8.pfb><G:/Anwendungen/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmmib10.pfb><G:/Anwendungen/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.p
+fb><G:/Anwendungen/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><G:/Anwendun
+gen/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><G:/Anwendungen/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmr8.pfb><G:/Anwendungen/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmsy10.pfb><G:/Anwendungen/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy
+6.pfb><G:/Anwendungen/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><G:/Anwen
+dungen/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><G:/Anwendungen/Mi
+KTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on masterthesis.pdf (4 pages, 158423 bytes).
 PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
+ 75 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

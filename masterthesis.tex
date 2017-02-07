@@ -1,6 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage[english]{babel}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{bm}
 
 \title{Application of Gaussian Process regression to the Estimation of time-in-therapeutic-range (TTR) and prediction of the international normalized ratio (INR) in patients under therapy with Vitamin K antagonists}
@@ -77,6 +78,58 @@
 	\end{displaymath}
 	
 	
+	\subsection{Fisher Information Matrix for Hyperparameters of the Gaussian Process}
+	As mentioned above a Gaussian Process can be seen as a multivariate Gaussian distribution:
 	
+	\begin{displaymath}
+	GP = f_{*}|X,y,X_{*} \sim N(\bar{f}_{*},cov(f_{*}))
+	\end{displaymath}
+	where 
+	\begin{displaymath}
+		\bar{f}_{*} \triangleq \mathbb{E}[f_{*}|X,y,X_{*}] = K(X_{*},X)[K(X,X) +\sigma^{2}_{n}I]^{-1}y
+	\end{displaymath}
+	and
+	\begin{displaymath}
+		\Sigma = cov(f_{*}) = K(X_{*},X_{*})-K(X_{*},X)[K(X,X) + \sigma^{2}_{n}I]^{-1}K(X,X_{*})
+	\end{displaymath}
 	
+	The mean-vector $\bar{f}_{*}$ and the covariance matrix $cov(f_{x})$ depend on the parameter vector $\theta = [\sigma, mean, l]$
+	
+	The Fisher Information Matrix for the parameters is 3x3 Matrix with the elements
+	
+	\begin{displaymath}
+	I_{m,n} = \frac{\partial \bar{f_{*}}^{T}}{\partial \theta_{m}}
+				\Sigma^{-1}
+				\frac{\partial \bar{f_{*}}}{\partial \theta_{n}}+
+				\frac{1}{2}
+				tr(\Sigma^{-1} \frac{\partial \Sigma}{\partial \theta_{m}} \Sigma^{-1} \frac{\partial \Sigma}{\partial \theta_{n}})
+	\end{displaymath}
+	
+	For abbreviation and better readability: 
+	\begin{align*}
+	& A \doteq K(X_{*},X) \\
+	& B \doteq [K(X,X) +\sigma^{2}_{n}I]
+	\end{align*}
+	
+	Using the derivation rules for matrices:
+	\begin{displaymath}
+	\frac{\partial}{\partial \theta}(A(\theta)B(\theta)) = (\frac{\partial}{\partial \theta}A(\theta)) B(\theta) + A(\theta)(\frac{\partial}{\partial \theta}B(\theta))
+	\end{displaymath}
+	
+	\begin{displaymath}
+	\frac{\partial}{\partial \theta}(A(\theta)^{-1}) = -A(\theta)^{-1} (\frac{\partial}{\partial \theta} A(\theta)) A(\theta)^{-1}
+	\end{displaymath}
+
+	\begin{align*}
+	& \frac{\partial \bar{f_{*}}}{\partial \theta_{m}} = \frac{\partial}{\partial \theta_{m}}(K(X_{*},X)[K(X,X) +\sigma^{2}_{n}I]^{-1}y) = \\
+	& \frac{\partial}{\partial \theta_{m}} (AB^{-1})y = \\
+	& (\frac{\partial}{\partial \theta_{m}} AB^{-1} + A \frac{\partial}{\partial \theta_{m}}B^{-1})y = \\ 
+	& (\frac{\partial}{\partial \theta_{m}} AB^{-1} + A (-B^{-1} \frac{\partial}{\partial \theta_{m}}B B^{-1}))y
+	\end{align*}
+	
+	\begin{align*}
+	& \frac{\partial}{\partial \theta_{m}}\Sigma = \frac{\partial}{\partial \theta_{m}} (K(X_{*},X_{*})-K(X_{*},X)[K(X,X) + \sigma^{2}_{n}I]^{-1}K(X,X_{*})) = \\
+	& \frac{\partial}{\partial \theta_{m}} (K(X_{*},X_{*})-(AB^{-1})K(X,X_{*}))= \\
+	& \frac{\partial}{\partial \theta_{m}} (K(X_{*},X_{*}) - [(\frac{\partial}{\partial \theta_{m}}AB^{-1} + A (-B^{-1} \frac{\partial}{\partial \theta_{m}}B B^{-1}))K(X,X_{*}) + (AB^{-1}) \frac{\partial}{\partial \theta} K(X,X_{*})] 
+	\end{align*}
 \end{document}
