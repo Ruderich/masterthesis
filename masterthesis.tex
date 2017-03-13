@@ -4,6 +4,10 @@
 \usepackage{amssymb}
 \usepackage{amsmath, amssymb}
 \usepackage{bm}
+\usepackage{graphicx}
+\usepackage[printonlyused]{acronym}
+\usepackage{color}
+\usepackage{listings}
 
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes} % great for keeping track of todos
 \usepackage{xargs}                      % Use more than one optional parameter in a new commands
@@ -16,149 +20,37 @@
 \title{Application of Gaussian Process regression to the Estimation of time-in-therapeutic-range (TTR) and prediction of the international normalized ratio (INR) in patients under therapy with Vitamin K antagonists}
 \author{Franz Ruderich}
 
+
 \begin{document}
 	\maketitle
 	
 	\clearpage
-	\listoftodos
 	
-	\vspace{2\baselineskip}
+	\bibliographystyle{unsrt}
 	
-    \info[inline]{I would recommend splitting chapters into separate file and 
-    link them in the main file via `input' command}
-    \info[inline]{Keep track of literature and citations right away! (Formula xyz, cf [?] p. xyz ...)}
+	\tableofcontents
+	
+	\clearpage
+		
+	\section{Background}
+	\graphicspath{{background/}}
+	\input{./background/background.tex}
+	
+	\clearpage
+	\graphicspath{{existing_work/}}
+	\section{Existing work}
+	\input{./existing_work/existing_work.tex}
+	
+	\graphicspath{{data_and_methods/}}
+	\section{Data and methods}
+	\input{./data_and_methods/data_and_methods.tex}
 	
 	\clearpage
 	
-	\section{Background}
-	\toadd[inline]{describe your data, include a panel of `typical' patients, maybe also
-	some less `nice'  ones where we could run into problems}
-	Data are patients from ...
-	\section{Existing work}
-	\toadd[inline]{describe piecewise linear model and show by example of one or two patients
-	that the model is sometimes implausible}
+	\section{Appendix}
+	\bibliography{list_of_references}
 	
-	\section{Data and methods}
+	\section*{Abbreviations}
+	\input{list_of_abbreviations.tex}
 	
-	\subsection{Gaussian Processes for Regression}
-	For noisy measurements of (laboratory) values at certain time points it is difficult to fix
-	what the best estimates of values between the time points or at future time points are.
-	The assumption of an underlying linear function makes it easy to fit a straight line by least-squares method. But this is often a oversimplification of the problem. The model will provide poor predictions, if the relationship between  dependent and independent variable can not be approximated by a linear function.
-	Even a polynomial regression models the changes of laboratory measurements  over time only unsatisfactorily with the problem of over-fitting
-	Regression with Gaussian processes is a smarter method to model the relationship between successive measured values. 
-	A Gaussian Process does not assume some specific model underlying the data but calculates the relationship between single data points.
-	In principle are Gaussian Processes a generalization of multivariate Gaussian distributions toward infinite dimensionality.
-	The $n$ observations of a (laboratory) data set $y=\{y_{1},y_{2}, \ldots ,y_{n}\}$ measured at the time points $t=\{t_{1},t_{2}, \ldots ,t_{n}\}$ could be imagined as a sample of a multivariate, n-variate Gaussian distribution.
-	
-	A Gaussian process of a real process $f(t)$ is characterized by a mean function $m(t)$ and covariance function $k(t,t')$:
-	
-	\begin{displaymath}
-	m(t) = E[f(t)]\\
-	\end{displaymath}
-	\begin{displaymath}
-	k(t,t') = E[(f(t)-m(t)) (f(t')-m(t'))]
-	\end{displaymath}   
-	
-	In the case of repeated laboratory measurements the function values $f(t)$ represent the laboratory value measured at the time point t.
-	   
-	A typical covariance function is the squared exponential covariance function:
-	
-	\begin{displaymath}
-	cov( f(t_{p} ), f(t_{q} )) = 
-	k( t_{p} , t_{q} ) = 
-	e^{-\frac{(t_{p}-t_{q})^2}{2*l^2}}
-	\end{displaymath}
-	
-	
-    \subsection{Estimation of hyperparameters}\change{Better use proper multivariate formulation right away! Formulate in terms of model used}
-	Maximum likelihood estimator: 
-	\begin{itemize}
-		\item unbiased: $E(\hat{\theta}) = \theta$ 
-		\item consistent: $\hat{\theta} \rightarrow \theta$, as $n \rightarrow \infty$
-		\item efficient: small $SE(\hat{\theta})$, as $n \rightarrow \infty$
-		\item asymptotically normal: $\frac{(\hat{\theta}-\theta)}{SE(\hat{\theta})} \sim N(0,1)$
-	\end{itemize}
-	\subsubsection{Accuracy of Maximum Likelihood Estimation - The Fisher Information}\change{v.s. make multivariate and make it concrete for the model we actually use}
-	The estimation of parameters $\bm{\theta}$ by maximizing the log-likelihood function means to find local maxima of this function. 
-	The first derivation of the log-likelihood function, the score, is equated to 0:
-	
-	\begin{displaymath}
-	\frac{\partial \ell (\theta;x)}{\partial \theta}=\frac{\partial \log p(x;\theta)}{\partial \theta} = 0
-	\end{displaymath}
-	
-	The maxima are found by solving this equation. 
-	But it is necessary to know how accurate this estiamtion is. This information is given by calculating the curvature of the likelihood function around the maxima. A sharp curvature around the maximum means a high certainty, while a flat course gives a signal for a quite uncertain estimation.
-	A measure for the curvature of the score function is the variance of the score, called Fisher Information $I(\theta)$. The variance of the score is calculated by this formula:
-	
-	\begin{displaymath}
-	I(\theta)=
-	V[\frac{\partial \ell (\theta,x)}{\partial \theta}]=
-	E[(\frac{\partial}{\partial\theta}\ell(\theta;x))^{2}]=	
-	-E[\frac{\partial^{2} \ell (\theta;x)}{\partial \theta^{2}}]
-	\end{displaymath}
-	
-	The MLE is asymptotically normal distributed, so a asymptotic normal approximation and calculation of a confidence interval is possible:
-	
-	\begin{displaymath}
-	\hat{\theta} \pm 1.96 \frac{1}{\sqrt{I(\hat{\theta})}} 
-	\end{displaymath}
-	
-	\toadd[inline]{if you add the ansatz for the computation of the Fisher 
-    	information in proper formulas (define your model in properly in 
-    	preceding sections) I can check it ;)}
-	
-	\subsection{Fisher Information Matrix for Hyperparameters of the Gaussian Process}
-	As mentioned above a Gaussian Process can be seen as a multivariate Gaussian distribution:
-	
-	\begin{displaymath}
-	GP = f_{*}|X,y,X_{*} \sim N(\bar{f}_{*},cov(f_{*}))
-	\end{displaymath}
-	where 
-	\begin{displaymath}
-		\bar{f}_{*} \triangleq \mathbb{E}[f_{*}|X,y,X_{*}] = K(X_{*},X)[K(X,X) +\sigma^{2}_{n}I]^{-1}y
-	\end{displaymath}
-	and
-	\begin{displaymath}
-		\Sigma = cov(f_{*}) = K(X_{*},X_{*})-K(X_{*},X)[K(X,X) + \sigma^{2}_{n}I]^{-1}K(X,X_{*})
-	\end{displaymath}
-	
-	The mean-vector $\bar{f}_{*}$ and the covariance matrix $cov(f_{x})$ depend on the parameter vector $\theta = [\sigma, mean, l]$
-	
-	The Fisher Information Matrix for the parameters is 3x3 Matrix with the elements
-	
-	\begin{displaymath}
-	I_{m,n} = \frac{\partial \bar{f_{*}}^{T}}{\partial \theta_{m}}
-				\Sigma^{-1}
-				\frac{\partial \bar{f_{*}}}{\partial \theta_{n}}+
-				\frac{1}{2}
-				tr(\Sigma^{-1} \frac{\partial \Sigma}{\partial \theta_{m}} \Sigma^{-1} \frac{\partial \Sigma}{\partial \theta_{n}})
-	\end{displaymath}
-	
-	For abbreviation and better readability: 
-	\begin{align*}
-	& A \doteq K(X_{*},X) \\
-	& B \doteq [K(X,X) +\sigma^{2}_{n}I]
-	\end{align*}
-	
-	Using the derivation rules for matrices:
-	\begin{displaymath}
-	\frac{\partial}{\partial \theta}(A(\theta)B(\theta)) = (\frac{\partial}{\partial \theta}A(\theta)) B(\theta) + A(\theta)(\frac{\partial}{\partial \theta}B(\theta))
-	\end{displaymath}
-	
-	\begin{displaymath}
-	\frac{\partial}{\partial \theta}(A(\theta)^{-1}) = -A(\theta)^{-1} (\frac{\partial}{\partial \theta} A(\theta)) A(\theta)^{-1}
-	\end{displaymath}
-
-	\begin{align*}
-	& \frac{\partial \bar{f_{*}}}{\partial \theta_{m}} = \frac{\partial}{\partial \theta_{m}}(K(X_{*},X)[K(X,X) +\sigma^{2}_{n}I]^{-1}y) = \\
-	& \frac{\partial}{\partial \theta_{m}} (AB^{-1})y = \\
-	& (\frac{\partial}{\partial \theta_{m}} AB^{-1} + A \frac{\partial}{\partial \theta_{m}}B^{-1})y = \\ 
-	& (\frac{\partial}{\partial \theta_{m}} AB^{-1} + A (-B^{-1} \frac{\partial}{\partial \theta_{m}}B B^{-1}))y
-	\end{align*}
-	
-	\begin{align*}
-	& \frac{\partial}{\partial \theta_{m}}\Sigma = \frac{\partial}{\partial \theta_{m}} (K(X_{*},X_{*})-K(X_{*},X)[K(X,X) + \sigma^{2}_{n}I]^{-1}K(X,X_{*})) = \\
-	& \frac{\partial}{\partial \theta_{m}} (K(X_{*},X_{*})-(AB^{-1})K(X,X_{*}))= \\
-	& \frac{\partial}{\partial \theta_{m}} (K(X_{*},X_{*}) - [(\frac{\partial}{\partial \theta_{m}}AB^{-1} + A (-B^{-1} \frac{\partial}{\partial \theta_{m}}B B^{-1}))K(X,X_{*}) + (AB^{-1}) \frac{\partial}{\partial \theta} K(X,X_{*})] 
-	\end{align*}
 \end{document}
